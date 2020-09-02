@@ -1,5 +1,5 @@
 <?php
-require_once ABS_PATH . 'tools/sql.php';
+require_once('tools/sql.php');
 
 class Database
 {

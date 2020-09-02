@@ -1,5 +1,5 @@
 <?php
-$page_title = 'Template Test';
+$page_title = 'Folder';
 ob_start();
 ?>
 <div class="border p-3 text-center">

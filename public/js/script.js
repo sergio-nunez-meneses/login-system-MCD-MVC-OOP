@@ -48,22 +48,5 @@ function validateSignIn() {
   }
 }
 
-function ajaxResponse() {
-  console.log(this.responseText);
-}
-
-function ajaxQuery(oFormElement) {
-  if (!oFormElement.action) {
-    return;
-  } else {
-    let oReq = new XMLHttpRequest();
-    oReq.onload = AJAXsuccess;
-    if (oFormElement.method.toLowerCase() === 'post') {
-      oReq.open('post', oFormElement.action);
-      oReq.send(new FormData(oFormElement));
-    }
-  }
-}
-
 SIGN_TAB.addEventListener('click', displayForms);
-SIGN_IN_BTN.addEventListener('click', validateSignIn);
+// SIGN_IN_BTN.addEventListener('click', validateSignIn);

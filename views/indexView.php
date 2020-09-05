@@ -3,7 +3,7 @@ $page_title = 'Folder';
 ob_start();
 ?>
 <div class="border p-3 text-center">
-  <div class="bg-danger text-white">
+  <div class="bg-warning text-white">
     <?php
     if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['success'])) {
       ?>

@@ -1,0 +1,27 @@
+// out: style.css, sourcemap: true, compress: true;
+// main: style.less;
+
+// @import 'vars.less';
+// @import 'mixins.less';
+
+.hidden {
+  display: none;
+}
+
+button[type="button"], button[type="submit"], a[class="navbar-brand"] {
+  transform: scale(1.0);
+  transition: transform 0.4s ease;
+  &:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease;
+  }
+}
+
+input[class="form-control"] {
+  transform: scale(1.0);
+  transition: transform 0.4s ease;
+  &:hover {
+    transform: scale(1.0125);
+    transition: all 0.3s ease;
+  }
+}

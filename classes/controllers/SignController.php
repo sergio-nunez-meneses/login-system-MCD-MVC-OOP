@@ -5,16 +5,16 @@ class SignController
 
   public static function sign_form()
   {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    {
-      if (isset($_POST['sign-up']))
-      {
-        SignController::sign_up();
-      } elseif (isset($_POST['sign-in']))
-      {
-        SignController::sign_in();
-      }
-    }
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST')
+    // {
+    //   if (isset($_POST['sign-up']))
+    //   {
+    //     SignController::sign_up();
+    //   } elseif (isset($_POST['sign-in']))
+    //   {
+    //     SignController::sign_in();
+    //   }
+    // }
     if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['signout']))
     {
       SignController::sign_out();
@@ -24,18 +24,18 @@ class SignController
 
   public static function sign_up()
   {
-    $error = false;
+    $error = FALSE;
     $user_id = $username = $password = $folder_name = $success_msg = $error_msg = '';
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['sign-up']))
     {
       if (empty($_POST['username']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'username cannot be empty';
       } elseif (strlen($_POST['username']) < 3)
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'username must contain more than 6 characters';
       } else
       {
@@ -44,11 +44,11 @@ class SignController
 
       if (empty($_POST['folder-name']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'folder name cannot be empty';
       } elseif (strlen($_POST['folder-name']) < 6)
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'folder name must contain more than 6 characters';
       } else
       {
@@ -57,31 +57,31 @@ class SignController
 
       if (empty($_POST['password']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password cannot be empty';
       } elseif (strlen($_POST['password']) < 6)
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password must contain more than 6 characters';
       } elseif (!preg_match("#[0-9]+#", $_POST['password']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password must contain at least one number!';
       } elseif (!preg_match("#[a-z]+#", $_POST['password']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password must contain at least one lowercase character!';
       } elseif (!preg_match("#[A-Z]+#", $_POST['password']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password must contain at least one uppercase character!';
       } elseif (!preg_match("#\W+#", $_POST['password']))
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'password must contain at least one symbol!';
       } elseif ($_POST['password'] !== $_POST['confirm-password'])
       {
-        $error = true;
+        $error = TRUE;
         $error_msg .= 'passwords do not match';
       } else
       {
@@ -92,9 +92,9 @@ class SignController
       }
     }
 
-    if ($error === false)
+    if ($error === FALSE)
     {
-      if ((new SignModel())->user_exists($username) === false)
+      if ((new SignModel())->user_exists($username) === FALSE)
       {
         $user_id = (new SignModel())->create_new_user($username, $password);
         (new SignModel())->create_user_folder($user_id, $folder_name);
@@ -118,15 +118,15 @@ class SignController
 
   public static function sign_in()
   {
-    $error = false;
+    $error = FALSE;
     $get_user = $username = $password = $stored_password = $success_msg = $error_msg = '';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['sign-in']))
-    {
+    // if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['sign-in']))
+    // {
       if (empty($_POST['username']))
       {
-        $error = true;
-        $error_msg .= 'username cannot be empty';
+        $error = TRUE;
+        $error_msg .= 'username cannot be empty <br>';
       } else
       {
         $username = $_POST['username'];
@@ -134,21 +134,22 @@ class SignController
 
       if (empty($_POST['password']))
       {
-        $error = true;
-        $error_msg .= 'password cannot be empty';
+        $error = TRUE;
+        $error_msg .= 'password cannot be empty <br>';
       } else
       {
         $password = $_POST['password'];
       }
 
-      if ($error === false)
+      if ($error === FALSE)
       {
         $get_user = (new SignModel())->get_user($username);
 
-        if ($get_user === false)
+        if ($get_user === FALSE)
         {
-          $error_msg .= 'user doesn\'t exist';
-          header("Location:/?error=$error_msg");
+          $error_msg .= 'user does not exist <br>';
+          // header("Location:/?error=$error_msg");
+          echo $error_msg;
         } else
         {
           $stored_password = $get_user['pass'];
@@ -161,26 +162,29 @@ class SignController
 
             $_SESSION['user'] = $username;
             $_SESSION['folder'] = $folder_name;
-            $_SESSION['logged_in'] = true;
+            $_SESSION['logged_in'] = TRUE;
 
-            $success_msg .= 'connexion successful!';
-            header("Location:/folder?success=$success_msg");
+            $success_msg .= 'connexion successful! <br>';
+            // header("Location:/folder?success=$success_msg");
+            echo $success_msg;
           } else
           {
-            $error_msg .= 'password incorrect';
-            header("Location:/?error=$error_msg");
+            $error_msg .= 'password incorrect <br>';
+            // header("Location:/?error=$error_msg");
+            echo $error_msg;
           }
         }
       } else
       {
-        header("Location:/?error=$error_msg");
+        // header("Location:/?error=$error_msg");
+        echo $error_msg;
       }
-    }
+    // }
   }
 
   public static function sign_out()
   {
-    if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['signout']))
+    if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['sign_out']))
     {
       session_unset();
       session_destroy();

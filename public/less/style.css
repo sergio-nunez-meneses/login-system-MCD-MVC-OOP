@@ -1,0 +1,23 @@
+.hidden {
+  display: none;
+}
+button[type="button"],
+button[type="submit"],
+a[class="navbar-brand"] {
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+button[type="button"]:hover,
+button[type="submit"]:hover,
+a[class="navbar-brand"]:hover {
+  transform: scale(1.1);
+  transition: all 0.3s ease;
+}
+input[class="form-control"] {
+  transform: scale(1);
+  transition: transform 0.4s ease;
+}
+input[class="form-control"]:hover {
+  transform: scale(1.0125);
+  transition: all 0.3s ease;
+}

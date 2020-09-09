@@ -5,21 +5,11 @@ class SignController
 
   public static function sign_form()
   {
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST')
-    // {
-    //   if (isset($_POST['sign-up']))
-    //   {
-    //     SignController::sign_up();
-    //   } elseif (isset($_POST['sign-in']))
-    //   {
-    //     SignController::sign_in();
-    //   }
-    // }
     if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['signout']))
     {
       SignController::sign_out();
     }
-    require('views/signView.php');
+    SignView::display();
   }
 
   public static function sign_up()
@@ -103,7 +93,7 @@ class SignController
         $_SESSION['folder'] = $folder_name;
         $_SESSION['logged_in'] = true;
 
-        $success_msg .= 'connexion successful!';
+        // $success_msg .= 'connexion successful!';
         header("Location:/folder?success=$success_msg");
       } else
       {
@@ -165,8 +155,8 @@ class SignController
             $_SESSION['logged_in'] = TRUE;
 
             $success_msg .= 'connexion successful! <br>';
-            // header("Location:/folder?success=$success_msg");
-            echo $success_msg;
+            header("Location:/folder?success=$success_msg");
+            // echo $success_msg;
           } else
           {
             $error_msg .= 'password incorrect <br>';

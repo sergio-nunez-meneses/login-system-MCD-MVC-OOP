@@ -9,6 +9,6 @@ class IndexController
     {
       SignController::sign_out();
     }
-    require('views/indexView.php');
+    IndexView::display();
   }
 }

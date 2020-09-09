@@ -6,30 +6,41 @@ class Database
 
   private $pdo;
 
-  public function __construct()
+  protected function connexion()
   {
-    try
+    $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHAR, DB_USER, DB_PASS, PDO_OPTIONS);
+
+    if (empty($this->pdo) === FALSE)
     {
-      $this->pdo = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHAR, DB_USER, DB_PASS, PDO_OPTIONS);
-      // echo 'connected to ' . DB_NAME . '<br>'; // just for debugging
-    } catch (\PDOException $e)
+      // echo 'Connected to database: ' . DB_NAME . '<br>'; // just for debugging
+      return TRUE;
+    }
+    else
     {
-      throw new \PDOException($e->getMessage(), (int)$e->getCode());
-      echo "error: $e!";
+      echo 'Failed connecting to database. <br>';
+      return FALSE;
     }
   }
 
-  public function run($sql, $placeholders = [])
+  protected function run($sql, $placeholders = [])
   {
-    try
+    if ($this->connexion() === TRUE)
     {
-      $stmt = $this->pdo->prepare($sql);
-      $stmt->execute($placeholders);
-      return $stmt;
-    } catch (\PDOException $e)
+      if (empty($placeholders))
+      {
+        return $this->pdo->query($sql)->fetchAll();
+      }
+      else
+      {
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute($placeholders);
+        return $stmt;
+      }
+    }
+    else
     {
-      throw new \PDOException($e->getMessage(), (int)$e->getCode());
-      echo "error: $e!";
+      echo 'Failed to run requested query. <br>';
+      return FALSE;
     }
   }
 }

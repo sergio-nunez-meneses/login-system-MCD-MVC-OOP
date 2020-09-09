@@ -23,3 +23,7 @@ function request(queryName, formElement) {
 
   return form;
 }
+
+function submitForm() {
+  
+}

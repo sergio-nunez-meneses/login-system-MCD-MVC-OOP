@@ -5,8 +5,8 @@ class SignView
 
   public static function display()
   {
-    $page_title = 'Sign';
-    ob_start();
+    // $page_title = 'Sign';
+    // ob_start();
     ?>
     <div class="border p-3 bg-light text-center">
       <div class="bg-danger text-white">
@@ -16,7 +16,7 @@ class SignView
         <button id="signTab" class="btn btn-md bg-primary text-white" type="button">Show Sign Up</button>
       </div>
       <!-- SIGN IN -->
-      <form id="signInForm" method="POST" enctype="multipart/form-data" onsubmit="ajaxQuery(request('sign_in_form', this)); return false;">
+      <form id="sign_in_form" method="POST" enctype="multipart/form-data" onsubmit="ajax(query(this.id, this), signInResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -28,7 +28,7 @@ class SignView
         </div>
       </form>
       <!-- SIGN UP -->
-      <form id="signUpForm" class="hidden" action="/sign" method="POST">
+      <form id="sign_up_form" class="hidden" method="POST" enctype="multipart/form-data" onsubmit="ajax(query(this.id, this), signInResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -42,12 +42,12 @@ class SignView
           <input class="form-control" type="password" name="confirm-password" placeholder="confirm password" required>
         </div>
         <div class="form-group">
-          <button class="btn btn-md bg-dark text-white" type="submit" name="sign-up">Submit</button>
+          <button class="btn btn-md bg-dark text-white" type="button" name="sign-up">Submit</button>
         </div>
       </form>
     </div>
     <?php
-    $page_content = ob_get_clean();
-    require('templates/template.php');
+    // $page_content = ob_get_clean();
+    // require('templates/template.php');
   }
 }

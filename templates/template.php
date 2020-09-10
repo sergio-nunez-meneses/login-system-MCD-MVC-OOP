@@ -32,7 +32,7 @@
         </nav>
       </header>
 
-      <main class="p-3">
+      <main id="mainContainer" class="p-3">
         <?php echo $page_content; ?>
       </main>
     </div>
@@ -42,5 +42,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="/public/js/script.js"></script>
     <script src="/public/js/ajax.js"></script>
+    <script src="/public/js/signInResponse.js"></script>
   </body>
 </html>

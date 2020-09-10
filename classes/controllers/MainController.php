@@ -3,12 +3,12 @@
 class MainController
 {
 
-  public static function execute($query, $inputs = false)
+  public static function dispatch_query($query, $inputs = false)
   {
     if
     ($query === 'init')
     {
-      //
+      $response = SignController::sign_form();
     }
     elseif ($query === 'sign_in_form')
     {

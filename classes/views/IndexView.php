@@ -3,21 +3,14 @@
 class IndexView
 {
 
-  public static function display()
+  public static function display($success_msg)
   {
-    $page_title = 'Folder';
-    ob_start();
+    // $page_title = 'Folder';
+    // ob_start();
     ?>
     <div class="border p-3 text-center">
       <div class="bg-warning text-white">
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['success']))
-        {
-          ?>
-          <p><?php echo $_GET['success']; ?></p>
-          <?php
-        }
-        ?>
+        <p><?php echo $success_msg; ?></p>
       </div>
       <div>
         <h1>Welcome!</h1>
@@ -34,7 +27,7 @@ class IndexView
       </div>
     </div>
     <?php
-    $page_content = ob_get_clean();
-    require('templates/template.php');
+    // $page_content = ob_get_clean();
+    // require('templates/template.php');
   }
 }

@@ -12,7 +12,7 @@ class SignController
     SignView::display();
   }
 
-  public static function sign_up()
+  public static function sign_up($inputs)
   {
     $error = FALSE;
     $user_id = $username = $password = $folder_name = $success_msg = $error_msg = '';
@@ -106,70 +106,69 @@ class SignController
     }
   }
 
-  public static function sign_in()
+  public static function sign_in($inputs)
   {
     $error = FALSE;
     $get_user = $username = $password = $stored_password = $success_msg = $error_msg = '';
 
-    // if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['sign-in']))
-    // {
-      if (empty($_POST['username']))
-      {
-        $error = TRUE;
-        $error_msg .= 'username cannot be empty <br>';
-      } else
-      {
-        $username = $_POST['username'];
-      }
+    if (empty($inputs['username']))
+    {
+      $error = TRUE;
+      $error_msg .= 'username cannot be empty <br>';
+    }
+    else
+    {
+      $username = $inputs['username'];
+    }
 
-      if (empty($_POST['password']))
+    if (empty($inputs['password']))
+    {
+      $error = TRUE;
+      $error_msg .= 'password cannot be empty <br>';
+    }
+    else
+    {
+      $password = $inputs['password'];
+    }
+
+    if ($error === FALSE)
+    {
+      $get_user = (new SignModel())->get_user($username);
+
+      if ($get_user === FALSE)
       {
-        $error = TRUE;
-        $error_msg .= 'password cannot be empty <br>';
-      } else
-      {
-        $password = $_POST['password'];
-      }
-
-      if ($error === FALSE)
-      {
-        $get_user = (new SignModel())->get_user($username);
-
-        if ($get_user === FALSE)
-        {
-          $error_msg .= 'user does not exist <br>';
-          // header("Location:/?error=$error_msg");
-          echo $error_msg;
-        } else
-        {
-          $stored_password = $get_user['pass'];
-
-          if (password_verify($password, $stored_password))
-          {
-            $user_id = $get_user['id'];
-            $username = $get_user['name'];
-            $folder_name = (new SignModel())->get_folder($user_id);
-
-            $_SESSION['user'] = $username;
-            $_SESSION['folder'] = $folder_name;
-            $_SESSION['logged_in'] = TRUE;
-
-            $success_msg .= 'connexion successful! <br>';
-            header("Location:/folder?success=$success_msg");
-            // echo $success_msg;
-          } else
-          {
-            $error_msg .= 'password incorrect <br>';
-            // header("Location:/?error=$error_msg");
-            echo $error_msg;
-          }
-        }
-      } else
-      {
-        // header("Location:/?error=$error_msg");
+        $error_msg .= 'user does not exist <br>';
         echo $error_msg;
       }
-    // }
+      else
+      {
+        $stored_password = $get_user['pass'];
+
+        if (password_verify($password, $stored_password))
+        {
+          $user_id = $get_user['id'];
+          $username = $get_user['name'];
+          $folder_name = (new SignModel())->get_folder($user_id);
+
+          $_SESSION['user'] = $username;
+          $_SESSION['folder'] = $folder_name;
+          $_SESSION['logged_in'] = TRUE;
+
+          $success_msg .= 'connexion successful! <br>';
+          $response = IndexView::display($success_msg);
+        }
+        else
+        {
+          $error_msg .= 'password incorrect <br>';
+          echo $error_msg;
+        }
+      }
+    }
+    else
+    {
+      // header("Location:/?error=$error_msg");
+      echo $error_msg;
+    }
   }
 
   public static function sign_out()

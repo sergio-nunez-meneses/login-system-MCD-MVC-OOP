@@ -1,6 +1,6 @@
 const SIGN_TAB = getId('signTab'),
-  SIGN_IN = getId('signInForm'),
-  SIGN_UP = getId('signUpForm'),
+  SIGN_IN = getId('sign_in_form'),
+  SIGN_UP = getId('sign_up_form'),
   SIGN_IN_BTN = getName('sign-in'),
   SIGN_UP_BTN = getName('sign-up');
 
@@ -24,29 +24,4 @@ function displayForms() {
   }
 }
 
-function validateSignIn() {
-  let user = getName('username').value,
-    pass = getName('password').value,
-    error = false,
-    errorMsg = '';
-
-  if (user.length == 0) {
-    error = true;
-    errorMsg += 'username cannot be empty\n';
-  }
-
-  if (pass.length == 0) {
-    error = true;
-    errorMsg += 'password cannot be empty\n';
-  }
-
-  if (error === false) {
-    SIGN_IN.submit();
-  } else {
-    alert(errorMsg);
-    return false;
-  }
-}
-
 SIGN_TAB.addEventListener('click', displayForms);
-// SIGN_IN_BTN.addEventListener('click', validateSignIn);

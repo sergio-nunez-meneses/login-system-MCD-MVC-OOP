@@ -4,14 +4,6 @@ const SIGN_TAB = getId('signTab'),
   SIGN_IN_BTN = getName('sign-in'),
   SIGN_UP_BTN = getName('sign-up');
 
-function getId(id) {
-  return document.getElementById(id);
-}
-
-function getName(name) {
-  return document.getElementsByName(name)[0];
-}
-
 function displayForms() {
   if (SIGN_UP.classList.contains('hidden')) {
     SIGN_UP.classList.remove('hidden');

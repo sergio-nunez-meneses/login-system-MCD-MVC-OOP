@@ -1,0 +1,1 @@
+ajax(query('init'), signInResponse);

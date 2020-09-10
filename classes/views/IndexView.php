@@ -5,8 +5,7 @@ class IndexView
 
   public static function display($success_msg)
   {
-    // $page_title = 'Folder';
-    // ob_start();
+    ob_start();
     ?>
     <div class="border p-3 text-center">
       <div class="bg-warning text-white">
@@ -27,7 +26,8 @@ class IndexView
       </div>
     </div>
     <?php
-    // $page_content = ob_get_clean();
-    // require('templates/template.php');
+    $response['html'] = ob_get_contents();
+    ob_clean();
+    return $response;
   }
 }

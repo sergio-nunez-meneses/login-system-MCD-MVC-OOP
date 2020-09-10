@@ -5,8 +5,7 @@ class SignView
 
   public static function display()
   {
-    // $page_title = 'Sign';
-    // ob_start();
+    ob_start();
     ?>
     <div class="border p-3 bg-light text-center">
       <div class="bg-danger text-white">
@@ -16,7 +15,7 @@ class SignView
         <button id="signTab" class="btn btn-md bg-primary text-white" type="button">Show Sign Up</button>
       </div>
       <!-- SIGN IN -->
-      <form id="sign_in_form" method="POST" enctype="multipart/form-data" onsubmit="ajax(query(this.id, this), signInResponse); return false;">
+      <form id="sign_in_form" method="POST" enctype="multipart/form-data" onsubmit="submitForm(this, signInResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -28,7 +27,7 @@ class SignView
         </div>
       </form>
       <!-- SIGN UP -->
-      <form id="sign_up_form" class="hidden" method="POST" enctype="multipart/form-data" onsubmit="ajax(query(this.id, this), signInResponse); return false;">
+      <form id="sign_up_form" class="hidden" method="POST" enctype="multipart/form-data" onsubmit="submitForm(this, signUpResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -47,7 +46,8 @@ class SignView
       </form>
     </div>
     <?php
-    // $page_content = ob_get_clean();
-    // require('templates/template.php');
+    $response['html'] = ob_get_contents();
+    ob_clean();
+    return $response;
   }
 }

@@ -1,7 +1,8 @@
 <?php
-spl_autoload_register('loader');
+session_start();
+spl_autoload_register('auto_class_loader');
 
-function loader($class_name)
+function auto_class_loader($class_name)
 {
   $path = $parent_folder = '';
 

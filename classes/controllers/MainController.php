@@ -3,12 +3,12 @@
 class MainController
 {
 
-  public static function dispatch_query($query, $inputs = false)
+  public static function query_dispatcher($query, $inputs = false)
   {
     if
     ($query === 'init')
     {
-      $response = SignController::sign_form();
+      $response = SignController::sign_forms();
     }
     elseif ($query === 'sign_in_form')
     {
@@ -19,13 +19,13 @@ class MainController
       $response = SignController::sign_up($inputs);
     }
     else
-    {
-      $response = SignController::sign_form();
+    { // if ($query === '')
+      $response = SignController::sign_forms();
     }
 
     if (empty($response) === FALSE)
     {
-      echo $response;
+      echo json_encode($response);
     }
   }
 }

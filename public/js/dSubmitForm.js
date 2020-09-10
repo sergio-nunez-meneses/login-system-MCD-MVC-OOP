@@ -8,6 +8,5 @@ function submitForm(form, callbackFunction) {
 
     request.append(input.name, input.value)
   }
-  console.log(request);
   ajax(request, callbackFunction);
 }

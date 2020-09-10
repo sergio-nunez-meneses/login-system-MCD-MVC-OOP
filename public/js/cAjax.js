@@ -4,8 +4,6 @@ function ajax(form, callbackFunction) {
   xhr.open('POST', 'actions/ajaxQuery.php');
   xhr.send(form);
   xhr.onload = callbackFunction;
-
-  return xhr;
 }
 
 function query(queryName) {

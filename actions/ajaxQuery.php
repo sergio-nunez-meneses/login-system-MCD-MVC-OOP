@@ -1,5 +1,5 @@
 <?php
 chdir('..');
-require('include/requirements.php');
+require_once('include/auto_class_loader.php');
 
-MainController::execute($_POST['query'], $_POST);
+MainController::query_dispatcher($_POST['query'], $_POST);

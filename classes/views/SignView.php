@@ -5,18 +5,26 @@ class SignView
 
   public static function display()
   {
-    $page_title = 'Sign';
     ob_start();
     ?>
     <div class="border p-3 bg-light text-center">
-      <div class="bg-danger text-white">
-        <p id="ajaxResponse" class="hidden alert alert-danger lead rounded"></p>
+      <div class="pb-5 px-3">
+        <p class="lead">Current connected user:
+          <?php
+          if (isset($_SESSION['user']) === TRUE) {
+            echo $_SESSION['user'];
+          } else {
+            echo 'No user connected';
+          }
+          ?>
+        </p>
+        <span class="font-italic text-secondary">(just for debugging)</span>
       </div>
       <div class="pt-0 pb-3 px-3">
         <button id="signTab" class="btn btn-md bg-primary text-white" type="button">Show Sign Up</button>
       </div>
       <!-- SIGN IN -->
-      <form id="signInForm" method="POST" enctype="multipart/form-data" onsubmit="ajaxQuery(request('sign_in_form', this)); return false;">
+      <form id="sign_in_form" method="POST" enctype="multipart/form-data" onsubmit="submitForm(this, signInResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -28,7 +36,7 @@ class SignView
         </div>
       </form>
       <!-- SIGN UP -->
-      <form id="signUpForm" class="hidden" action="/sign" method="POST">
+      <form id="sign_up_form" class="hidden" method="POST" enctype="multipart/form-data" onsubmit="submitForm(this, signUpResponse); return false;">
         <div class="form-group">
           <input class="form-control" type="text" name="username" placeholder="username" required>
         </div>
@@ -47,7 +55,8 @@ class SignView
       </form>
     </div>
     <?php
-    $page_content = ob_get_clean();
-    require('templates/template.php');
+    $response['html'] = ob_get_contents();
+    ob_clean();
+    return $response;
   }
 }

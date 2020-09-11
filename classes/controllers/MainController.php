@@ -18,8 +18,12 @@ class MainController
     {
       $response = SignController::sign_up($inputs);
     }
+    elseif ($query === 'sign_out_form')
+    {
+      $response = SignController::sign_out();
+    }
     else
-    { // if ($query === '')
+    {
       $response = SignController::sign_forms();
     }
 

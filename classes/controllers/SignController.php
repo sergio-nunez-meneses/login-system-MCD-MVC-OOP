@@ -183,11 +183,8 @@ class SignController
 
   public static function sign_out()
   {
-    if (($_SERVER['REQUEST_METHOD'] == 'GET') && isset($_GET['sign_out']))
-    {
-      session_unset();
-      session_destroy();
-      header('Location:/');
-    }
+    session_unset();
+    session_destroy();
+    return SignController::sign_forms();
   }
 }

@@ -9,26 +9,15 @@
   <body>
 
     <header class="container-fluid">
-      <div class="pt-0 pb-3 px-3">
+      <div class="m-0 pt-0 pb-3 px-3">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="/">Home</a>
+          <a class="navbar-brand" href="/">
+            <button class="btn btn-lg bg-dark text-white" type="button">Home</button>
+          </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <?php
-            if (isset($_SESSION['logged_in']) && ($_SESSION['logged_in'] === true))
-            {
-              ?>
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="/?sign_out=yes">Logout</a>
-                </li>
-              </ul>
-              <?php
-            }
-            ?>
-          </div>
+          <div class="collapse navbar-collapse justify-content-end" id="navbarNav"></div>
         </nav>
       </div>
     </header>

@@ -11,6 +11,17 @@ class SignView
       <div class="bg-danger text-white">
         <p id="ajaxResponse" class="hidden alert alert-danger lead rounded"></p>
       </div>
+      <div class="pt-1 pb-3 px-3">
+        <p class="lead">Current connected user <span class="font-italic text-secondary">(just for debugging)</span>:
+          <?php
+          if (isset($_SESSION['user']) === TRUE) {
+            echo $_SESSION['user'];
+          } else {
+            echo 'No user connected';
+          }
+          ?>
+        </p>
+      </div>
       <div class="pt-0 pb-3 px-3">
         <button id="signTab" class="btn btn-md bg-primary text-white" type="button">Show Sign Up</button>
       </div>

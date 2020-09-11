@@ -4,7 +4,7 @@ function auto_js_loader($path) {
   $content = scandir($path);
 
   foreach ($content as $files) {
-    if ($files !== '.' && $files !== '..') {
+    if ($files !== '.' && $files !== '..' && $files !== 'bDisplayForms.js') {
       if (is_dir("$path/$files") === TRUE) {
         auto_js_loader("$path/$files");
       } else {

@@ -8,11 +8,8 @@ class SignView
     ob_start();
     ?>
     <div class="border p-3 bg-light text-center">
-      <div class="bg-danger text-white">
-        <p id="ajaxResponse" class="hidden alert alert-danger lead rounded"></p>
-      </div>
-      <div class="pt-1 pb-3 px-3">
-        <p class="lead">Current connected user <span class="font-italic text-secondary">(just for debugging)</span>:
+      <div class="pb-5 px-3">
+        <p class="lead">Current connected user:
           <?php
           if (isset($_SESSION['user']) === TRUE) {
             echo $_SESSION['user'];
@@ -21,6 +18,7 @@ class SignView
           }
           ?>
         </p>
+        <span class="font-italic text-secondary">(just for debugging)</span>
       </div>
       <div class="pt-0 pb-3 px-3">
         <button id="signTab" class="btn btn-md bg-primary text-white" type="button">Show Sign Up</button>
@@ -52,7 +50,7 @@ class SignView
           <input class="form-control" type="password" name="confirm-password" placeholder="confirm password" required>
         </div>
         <div class="form-group">
-          <button class="btn btn-md bg-dark text-white" type="button" name="sign-up">Submit</button>
+          <button class="btn btn-md bg-dark text-white" type="submit" name="sign-up">Submit</button>
         </div>
       </form>
     </div>

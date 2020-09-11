@@ -100,18 +100,22 @@ class SignController
         $_SESSION['logged_in'] = true;
 
         $success_msg .= 'connexion successful! <br>';
+
         $response = IndexController::main_folder($success_msg);
         return $response;
       }
       else
       {
         $error_msg .= 'username already exists';
-        echo $error_msg;
+
+        $response = ErrorView::display($error_msg);
+        return $response;
       }
     }
     else
     {
-      echo $error_msg;
+      $response = ErrorView::display($error_msg);
+      return $response;
     }
   }
 
@@ -123,7 +127,7 @@ class SignController
     if (empty($inputs['username']))
     {
       $error = TRUE;
-      $error_msg .= 'username cannot be empty <br>';
+      $error_msg .= 'username cannot be empty';
     }
     else
     {
@@ -148,7 +152,9 @@ class SignController
       if ($get_user === FALSE)
       {
         $error_msg .= 'user does not exist <br>';
-        echo $error_msg;
+
+        $response = ErrorView::display($error_msg);
+        return $response;
       }
       else
       {
@@ -165,19 +171,23 @@ class SignController
           $_SESSION['logged_in'] = TRUE;
 
           $success_msg .= 'connexion successful! <br>';
+
           $response = IndexController::main_folder($success_msg);
           return $response;
         }
         else
         {
           $error_msg .= 'password incorrect <br>';
-          echo $error_msg;
+
+          $response = ErrorView::display($error_msg);
+          return $response;
         }
       }
     }
     else
     {
-      echo $error_msg;
+      $response = ErrorView::display($error_msg);
+      return $response;
     }
   }
 
@@ -185,6 +195,8 @@ class SignController
   {
     session_unset();
     session_destroy();
-    return SignController::sign_forms();
+
+    $response = SignController::sign_forms();
+    return $response;
   }
 }
